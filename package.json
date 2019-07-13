@@ -26,12 +26,15 @@
     "jest": "^24.8.0",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
-    "build:dev": "webpack --config webpack/webpack.development.config.js",
+    "lint": "tslint -p .",
+    "build:dev": "npm run lint && webpack --config webpack/webpack.development.config.js",
     "start:dev": "npm run build:dev && webpack-dev-server --config webpack/webpack.development.config.js"
   },
   "browserslist": {

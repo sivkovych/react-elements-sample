@@ -1,4 +1,4 @@
-export interface FormSettings {
+export interface IFormSettings {
     name: string;
     age?: number;
 }
