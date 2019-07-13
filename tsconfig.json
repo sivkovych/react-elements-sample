@@ -1,24 +1,36 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
+    "strict": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "esModuleInterop": false,
+    "module": "commonjs",
     "target": "es5",
     "lib": [
+      "es5",
+      "es2015",
+      "es2017",
       "dom",
-      "dom.iterable",
-      "esnext"
+      "scripthost"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "jsxFactory": "h",
+    "experimentalDecorators": true
   },
   "include": [
-    "src"
-  ]
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true,
+    "babelCore": "@babel/core",
+    "babelOptions": {
+      "babelrc": true
+    }
+  }
 }
