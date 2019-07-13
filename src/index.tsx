@@ -1,10 +1,10 @@
-import {h, render} from 'preact';
-import Form from './components/Form';
-import {FormSettings} from "./model/FormSettings";
+import {h, render} from "preact";
+import Form from "./components/Form";
+import {IFormSettings} from "./model/IFormSettings";
 
 // noinspection JSUnusedGlobalSymbols
-export default function renderForm(targetElement: Element, settings: FormSettings): void {
+export default function renderForm(targetElement: Element, settings: IFormSettings): void {
     render((
         <Form {...settings}/>
     ), targetElement);
-};
+}
