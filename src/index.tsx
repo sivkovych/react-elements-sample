@@ -1,12 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'preact';
+import ReactDOM from 'preact';
+// import render from 'preact';
+import Kek, {AppProps} from './Kek';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<Kek/>, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// noinspection JSUnusedGlobalSymbols
+export default function KekApp(targetElement: any, properties: AppProps) {
+    // React.render((
+    //     {/*<Kek {...properties}/>*/}
+    // ), targetElement);
+    ReactDOM.render((
+        <Kek {...properties}/>
+    ), targetElement);
+};
+
