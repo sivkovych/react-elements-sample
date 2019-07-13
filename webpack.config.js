@@ -5,21 +5,18 @@ module.exports = {
     entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, './dist'),
-        libraryTarget: "umd",
+        filename: 'app.js',
+        libraryTarget: 'umd',
         library: 'Kek'
     },
     resolve: {
         extensions: [
-            ".webpack.js",
-            ".web.js",
-            ".ts",
-            ".tsx",
-            ".js"
-        ],
-        alias: {
-            'react': 'preact-compat',
-            'react-dom': 'preact-compat'
-        }
+            '.webpack.js',
+            '.web.js',
+            '.ts',
+            '.tsx',
+            '.js'
+        ]
     },
     module: {
         rules: [
@@ -34,11 +31,14 @@ module.exports = {
                         '@babel/preset-react'
                     ],
                     plugins: [
-                        // '@babel/plugin-transform-typescript',
-                        "@babel/proposal-class-properties",
-                        "@babel/proposal-object-rest-spread",
+                        // This plugin transforms static class properties
+                        // as well as properties declared with the property initializer syntax.
+                        '@babel/proposal-class-properties',
+                        // Compile object rest and spread to ES5.
+                        '@babel/proposal-object-rest-spread',
+                        // Compile function bind operator to ES5.
                         '@babel/plugin-proposal-function-bind',
-                        'transform-react-remove-prop-types',
+                        // Treat React JSX elements as value types and hoist them to the highest scope.
                         'transform-react-constant-elements'
                     ]
                 }
@@ -46,14 +46,12 @@ module.exports = {
         ]
     },
     optimization: {
-        minimize: true
+        minimize: true,
+        occurrenceOrder: true,
+        mergeDuplicateChunks: true
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': "'production'"
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin()
     ]
 };
 
