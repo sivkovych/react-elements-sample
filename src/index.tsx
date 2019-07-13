@@ -1,11 +1,10 @@
-import React from 'preact';
-import ReactDOM from 'preact';
-import Kek, {AppProps} from './Kek';
+import {h, render} from 'preact';
+import Form from './components/Form';
+import {FormSettings} from "./model/FormSettings";
 
 // noinspection JSUnusedGlobalSymbols
-export default function KekApp(targetElement: HTMLElement, properties: AppProps) {
-    ReactDOM.render((
-        <Kek {...properties}/>
+export default function renderForm(targetElement: Element, settings: FormSettings): void {
+    render((
+        <Form {...settings}/>
     ), targetElement);
 };
-
