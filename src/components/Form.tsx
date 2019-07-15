@@ -9,43 +9,43 @@ export default class Form extends Component<IFormSettings, IFormState> {
             age: settings.age,
             name: settings.name
         };
-        console.log("From [Form::constructor]");
+        console.log("### [Form::constructor]");
     }
 
     public componentWillMount(): void {
-        console.log("From [Form::componentWillMount]");
+        console.log("### [Form::componentWillMount]");
     }
 
     public componentWillUnmount(): void {
-        console.log("From [Form::componentWillMount]");
+        console.log("### [Form::componentWillUnmount]");
     }
 
     public getChildContext(): object {
-        console.log("From [Form::componentWillMount]");
+        console.log("### [Form::getChildContext]");
         return {
             i_am: "child_context"
         };
     }
 
     public componentWillReceiveProps(): void {
-        console.log("From [Form::componentWillMount]");
+        console.log("### [Form::componentWillReceiveProps]: arguments = ", arguments);
     }
 
     public shouldComponentUpdate(): boolean {
-        console.log("From [Form::componentWillMount]");
+        console.log("### [Form::shouldComponentUpdate]: arguments = ", arguments);
         return true;
     }
 
     public componentDidUpdate(): void {
-        console.log("From [Form::componentDidUpdate]");
+        console.log("### [Form::componentDidUpdate]: arguments = ", arguments);
     }
 
     public componentWillUpdate(): void {
-        console.log("From [Form::componentWillUpdate]");
+        console.log("### [Form::componentWillUpdate]: arguments = ", arguments);
     }
 
     public componentDidMount(): void {
-        console.log("From [Form::componentDidMount]");
+        console.log("### [Form::componentDidMount]");
         setTimeout(() => {
             this.setState({
                 name: "React's componentDidMount worked as expected"
@@ -54,7 +54,7 @@ export default class Form extends Component<IFormSettings, IFormState> {
     }
 
     public render(settings: IFormSettings, state: IFormState): ComponentChild {
-        console.log("From [Form::render]");
+        console.log("### [Form::render]");
         return (
             <h1>
                 settings: {JSON.stringify(settings, null, "\t")},
