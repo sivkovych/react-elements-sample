@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@types/node": "12.6.2",
-    "preact": "^8.4.2",
-    "preact-compat": "^3.19.0",
+    "preact": "next",
+    "redux": "^4.0.4",
     "typescript": "^3.5.3"
   },
   "devDependencies": {

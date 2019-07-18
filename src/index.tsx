@@ -3,7 +3,7 @@ import Form from "./components/Form";
 import {IFormSettings} from "./model/IFormSettings";
 
 // noinspection JSUnusedGlobalSymbols
-export default function renderMe(settings: IFormSettings | undefined | null): void {
+export default function(settings: IFormSettings | undefined | null): void {
     if (typeof settings !== "object" || settings === null) {
         console.warn("Configuration is not defined.");
         return;
