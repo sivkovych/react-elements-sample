@@ -9,7 +9,6 @@
   "dependencies": {
     "@types/node": "12.6.2",
     "preact": "next",
-    "redux": "^4.0.4",
     "typescript": "^3.5.3"
   },
   "devDependencies": {
