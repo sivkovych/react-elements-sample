@@ -1,6 +1,5 @@
 export interface IFormState {
-    name: string;
-    age?: number;
-    lol?: bigint;
-    kek?: boolean;
+    id: number;
+    title: string;
+    message?: string;
 }

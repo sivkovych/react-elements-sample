@@ -8,11 +8,7 @@ export default function(settings: IFormSettings | undefined | null): void {
         console.warn("Configuration is not defined.");
         return;
     }
-    const rootSelector = settings.rootSelector;
-    if (typeof rootSelector !== "string") {
-        console.warn("Mandatory configuration parameter [rootSelector] is empty.");
-        return;
-    }
+    const rootSelector = settings.rootSelector || "";
     const $root: Element | null = document.querySelector(rootSelector);
     if ($root === null) {
         console.warn("Could not find root element by [rootSelector] configuration parameter.");

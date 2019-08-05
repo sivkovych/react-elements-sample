@@ -1,5 +1,4 @@
 export interface IFormSettings {
-    rootSelector: string | undefined | null;
-    name: string;
-    age?: number;
+    rootSelector: string;
+    options?: object;
 }

@@ -6,8 +6,8 @@ export default class Form extends Component<IFormSettings, IFormState> {
     constructor(settings: IFormSettings) {
         super(settings);
         this.state = {
-            age: settings.age,
-            name: settings.name
+            id: Math.round(Math.random() * Math.pow(10, 6)),
+            title: "General Form"
         };
         console.log("### [Form::constructor]");
     }
@@ -48,7 +48,7 @@ export default class Form extends Component<IFormSettings, IFormState> {
         console.log("### [Form::componentDidMount]");
         setTimeout(() => {
             this.setState({
-                name: "React's componentDidMount worked as expected"
+                message: "React's componentDidMount worked as expected"
             });
         }, 2000);
     }
