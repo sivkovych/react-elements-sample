@@ -1,4 +1,4 @@
-export interface IFormSettings {
+export interface IFormProperties {
     rootSelector: string;
     options?: object;
 }

@@ -1,65 +1,77 @@
 import {Component, ComponentChild, h} from "preact";
-import {IFormSettings} from "../model/IFormSettings";
-import {IFormState} from "../model/IFormState";
+import {IFormProperties} from "../model/form/IFormProperties";
+import {IFormState} from "../model/form/IFormState";
+import ITopLevelItemProperties from "../model/item/top-level/ITopLevelItemProperties";
+import UserRole from "../model/UserRole";
+import {randomInt} from "../util/util";
+import TopLevelItem from "./TopLevelItem/TopLevelItem";
 
-export default class Form extends Component<IFormSettings, IFormState> {
-    constructor(settings: IFormSettings) {
-        super(settings);
+export default class Form extends Component<IFormProperties, IFormState> {
+    constructor(properties: IFormProperties) {
+        super(properties);
         this.state = {
-            id: Math.round(Math.random() * Math.pow(10, 6)),
-            title: "General Form"
+            completed: [],
+            formKey: `${randomInt()}-FORM-${randomInt()}`,
+            items: [],
+            status: "Initialized",
+            user: {
+                id: randomInt(),
+                name: "John Smith",
+                role: UserRole.SWEEPER
+            }
         };
-        console.log("### [Form::constructor]");
-    }
-
-    public componentWillMount(): void {
-        console.log("### [Form::componentWillMount]");
-    }
-
-    public componentWillUnmount(): void {
-        console.log("### [Form::componentWillUnmount]");
-    }
-
-    public getChildContext(): object {
-        console.log("### [Form::getChildContext]");
-        return {
-            i_am: "child_context"
-        };
-    }
-
-    public componentWillReceiveProps(): void {
-        console.log("### [Form::componentWillReceiveProps]: arguments = ", arguments);
-    }
-
-    public shouldComponentUpdate(): boolean {
-        console.log("### [Form::shouldComponentUpdate]: arguments = ", arguments);
-        return true;
-    }
-
-    public componentDidUpdate(): void {
-        console.log("### [Form::componentDidUpdate]: arguments = ", arguments);
-    }
-
-    public componentWillUpdate(): void {
-        console.log("### [Form::componentWillUpdate]: arguments = ", arguments);
     }
 
     public componentDidMount(): void {
-        console.log("### [Form::componentDidMount]");
         setTimeout(() => {
             this.setState({
-                message: "React's componentDidMount worked as expected"
+                items: [{
+                    description: "Description of some Top Level Item",
+                    id: randomInt(),
+                    title: "Title of some Top Level Item",
+                }, {
+                    description: "Another description of some Top Level Item",
+                    id: randomInt(),
+                    title: "Another title of some Top Level Item",
+                }, {
+                    description: "And another description of some Top Level Item",
+                    id: randomInt(),
+                    title: "And another title of some Top Level Item",
+                }],
+                status: "Mounted"
             });
         }, 2000);
     }
 
-    public render(settings: IFormSettings, state: IFormState): ComponentChild {
-        console.log("### [Form::render]");
+    public render(properties: IFormProperties, state: IFormState): ComponentChild {
+        const items = this.state.items;
+        const itemElements = (itemProperties: ITopLevelItemProperties, index: number) => {
+            itemProperties.onItemCompletion = this.onItemCompletion.bind(this);
+            return <TopLevelItem key={index} {...itemProperties}/>;
+        };
         return (
-            <h1>
-                settings: {JSON.stringify(settings, null, "\t")},
-                state: {JSON.stringify(state, null, "\t")}
-            </h1>
+            <div>
+                <pre>
+                    <br/>Form Settings: {JSON.stringify(properties, null, 2)}
+                    <br/>Form State: {JSON.stringify(state, null, 2)}
+                    <hr/>
+                    <ul>
+                        {items.map(itemElements)}
+                    </ul>
+                    <hr/>
+                </pre>
+            </div>
         );
+    }
+
+    private onItemCompletion(itemId: number): void {
+        const completedItems = this.state.completed;
+        const isPresent = completedItems.indexOf(itemId) !== -1;
+        if (!isPresent) {
+            completedItems.push(itemId);
+            this.setState({
+                completed: completedItems
+            });
+        }
     }
 }
