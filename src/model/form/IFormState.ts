@@ -1,14 +1,11 @@
 import ITopLevelItemProperties from "../item/top-level/ITopLevelItemProperties";
-import UserRole from "../UserRole";
+import IUser from "../user/IUser";
+import UserRole from "../user/UserRole";
 
 export interface IFormState {
     formKey: string;
     status: string;
-    user?: {
-        id: number;
-        name: string;
-        role: UserRole;
-    };
+    user?: IUser;
     items: ITopLevelItemProperties[];
     completed: number[];
     options?: object;

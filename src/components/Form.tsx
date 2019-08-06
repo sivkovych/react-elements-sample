@@ -2,7 +2,7 @@ import {Component, ComponentChild, h} from "preact";
 import {IFormProperties} from "../model/form/IFormProperties";
 import {IFormState} from "../model/form/IFormState";
 import ITopLevelItemProperties from "../model/item/top-level/ITopLevelItemProperties";
-import UserRole from "../model/UserRole";
+import UserRole from "../model/user/UserRole";
 import {randomInt} from "../util/util";
 import TopLevelItem from "./TopLevelItem/TopLevelItem";
 
