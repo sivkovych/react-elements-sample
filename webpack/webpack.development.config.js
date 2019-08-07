@@ -67,7 +67,7 @@ module.exports = {
         },
         noEmitOnErrors: false,
         checkWasmTypes: false,
-        minimize: false,
+        minimize: true,
     },
     plugins: [
         new webpack.NamedModulesPlugin(),
