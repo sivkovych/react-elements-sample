@@ -51,9 +51,7 @@ export default class TopLevelItem extends React.Component<ITopLevelItemPropertie
         }
         this.setState({status: "Completed"}, () => {
             const mine = this.props;
-            if (mine.onItemCompletion) {
-                mine.onItemCompletion(mine.id);
-            }
+            mine.onItemCompletion?.(mine.id);
         });
     }
 }
