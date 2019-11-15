@@ -3,7 +3,7 @@ const path = require('path');
 
 const DEV_FILE_NAME = 'form.dev.js';
 const DEV_MAP_NAME = 'form.dev.map';
-const DIST_PATH = path.resolve(__dirname, '../dist');
+const PROJECT_BUILD_PATH = path.resolve(__dirname, '../target');
 
 module.exports = {
     mode: 'development',
@@ -11,7 +11,7 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         port: 8083,
-        contentBase: DIST_PATH,
+        contentBase: PROJECT_BUILD_PATH,
         watchContentBase: true,
         liveReload: true,
         watchOptions: {
@@ -19,7 +19,7 @@ module.exports = {
         }
     },
     output: {
-        path: DIST_PATH,
+        path: PROJECT_BUILD_PATH,
         pathinfo: true,
         filename: DEV_FILE_NAME,
         sourceMapFilename: DEV_MAP_NAME,

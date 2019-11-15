@@ -1,9 +1,9 @@
-import {Component, ComponentChild, h} from "preact";
+import * as React from "react";
 import ITopLevelItemProperties from "../../model/item/top-level/ITopLevelItemProperties";
 import ITopLevelItemState from "../../model/item/top-level/ITopLevelItemState";
-import {randomInt} from "../../util/util";
+import {prettyJson, randomInt} from "../../util/util";
 
-export default class TopLevelItem extends Component<ITopLevelItemProperties, ITopLevelItemState> {
+export default class TopLevelItem extends React.Component<ITopLevelItemProperties, ITopLevelItemState> {
     constructor(settings: ITopLevelItemProperties) {
         super(settings);
         this.state = {
@@ -21,21 +21,23 @@ export default class TopLevelItem extends Component<ITopLevelItemProperties, ITo
         }, 2000);
     }
 
-    public render(properties: ITopLevelItemProperties, state: ITopLevelItemState): ComponentChild {
-        const boundClick = (event: Event): void => {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            this.completeItem.call(this);
-        };
+    public render(): React.ReactNode {
+        const state = this.state;
+        const itemKey = state.itemKey;
+        const prettyState = prettyJson(state);
+        const prettyProps = prettyJson(this.props);
+        const onClickCompletion = () => this.completeItem();
         return (
             <li>
                 <pre>
-                    <br/>TopLevelItem Settings: {JSON.stringify(properties, null, 2)}
-                    <br/>TopLevelItem State: {JSON.stringify(state, null, 2)}
-                    <button onClick={boundClick}>
-                        Complete Item #{this.state.itemKey}
+                    <br/>TopLevelItem Settings: {prettyProps}
+                    <br/>TopLevelItem State: {prettyState}
+                    <button
+                        id={itemKey}
+                        disabled={state.status === "Completed"}
+                        onClick={onClickCompletion}
+                    >
+                        Complete Item #{itemKey}
                     </button>
                 </pre>
             </li>
@@ -43,16 +45,13 @@ export default class TopLevelItem extends Component<ITopLevelItemProperties, ITo
     }
 
     private completeItem(): void {
-        if (this.state.status !== "Mounted") {
+        const state = this.state;
+        if (state.status !== "Mounted") {
             return;
         }
-        this.setState({
-            status: "Completed"
-        }, () => {
+        this.setState({status: "Completed"}, () => {
             const mine = this.props;
-            if (mine.onItemCompletion) {
-                mine.onItemCompletion(mine.id);
-            }
+            mine.onItemCompletion?.(mine.id);
         });
     }
 }
