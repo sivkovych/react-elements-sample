@@ -1,4 +1,5 @@
-import {h, render} from "preact";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import Form from "./components/Form";
 import {IFormProperties} from "./model/form/IFormProperties";
 
@@ -14,5 +15,5 @@ export default function(properties: IFormProperties | undefined | null): void {
         console.warn("Could not find root element by [rootSelector] configuration parameter.");
         return;
     }
-    render(<Form {...properties}/>, $root);
+    ReactDOM.render(<Form {...properties}/>, $root);
 }

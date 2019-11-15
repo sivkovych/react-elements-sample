@@ -1,12 +1,12 @@
-import {Component, ComponentChild, h} from "preact";
+import * as React from "react";
 import {IFormProperties} from "../model/form/IFormProperties";
 import {IFormState} from "../model/form/IFormState";
 import ITopLevelItemProperties from "../model/item/top-level/ITopLevelItemProperties";
 import UserRole from "../model/user/UserRole";
-import {randomInt} from "../util/util";
+import {prettyJson, randomInt} from "../util/util";
 import TopLevelItem from "./TopLevelItem/TopLevelItem";
 
-export default class Form extends Component<IFormProperties, IFormState> {
+export default class Form extends React.Component<IFormProperties, IFormState> {
     constructor(properties: IFormProperties) {
         super(properties);
         this.state = {
@@ -43,20 +43,19 @@ export default class Form extends Component<IFormProperties, IFormState> {
         }, 2000);
     }
 
-    public render(properties: IFormProperties, state: IFormState): ComponentChild {
-        const items = this.state.items;
-        const itemElements = (itemProperties: ITopLevelItemProperties, index: number) => {
-            itemProperties.onItemCompletion = this.onItemCompletion.bind(this);
-            return <TopLevelItem key={index} {...itemProperties}/>;
-        };
+    public render(): React.ReactNode {
+        const state = this.state;
+        const items = state.items;
+        const prettyState = prettyJson(state);
+        const prettyProps = prettyJson(this.props);
         return (
             <div>
                 <pre>
-                    <br/>Form Settings: {JSON.stringify(properties, null, 2)}
-                    <br/>Form State: {JSON.stringify(state, null, 2)}
+                    <br/>Form Settings: {prettyProps}
+                    <br/>Form State: {prettyState}
                     <hr/>
                     <ul>
-                        {items.map(itemElements)}
+                        {items.map((item, index) => this.createItem(item, index))}
                     </ul>
                     <hr/>
                 </pre>
@@ -64,13 +63,26 @@ export default class Form extends Component<IFormProperties, IFormState> {
         );
     }
 
+    private createItem(itemProperties: ITopLevelItemProperties, index: number) {
+        itemProperties.onItemCompletion = this.onItemCompletion.bind(this);
+        return <TopLevelItem key={index} {...itemProperties}/>;
+    }
+
     private onItemCompletion(itemId: number): void {
-        const completedItems = this.state.completed;
+        const state = this.state;
+        const completedItems = state.completed;
         const isPresent = completedItems.indexOf(itemId) !== -1;
         if (!isPresent) {
             completedItems.push(itemId);
             this.setState({
-                completed: completedItems
+                completed: completedItems,
+                status: (() => {
+                    const completeCount = completedItems.length;
+                    if (completeCount === state.items.length) {
+                        return "Completed";
+                    }
+                    return "In Progress";
+                })()
             });
         }
     }

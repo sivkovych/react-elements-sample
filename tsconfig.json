@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./target/",
     "strict": true,
     "sourceMap": true,
     "noImplicitAny": true,
@@ -15,7 +15,6 @@
       "scripthost"
     ],
     "jsx": "react",
-    "jsxFactory": "h",
     "experimentalDecorators": true
   },
   "include": [
@@ -23,7 +22,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "target"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
