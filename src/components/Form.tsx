@@ -1,6 +1,6 @@
 import * as React from "react";
-import {IFormProperties} from "../model/form/IFormProperties";
-import {IFormState} from "../model/form/IFormState";
+import IFormProperties from "../model/form/IFormProperties";
+import IFormState from "../model/form/IFormState";
 import ITopLevelItemProperties from "../model/item/top-level/ITopLevelItemProperties";
 import UserRole from "../model/user/UserRole";
 import {prettyJson, randomInt} from "../util/util";

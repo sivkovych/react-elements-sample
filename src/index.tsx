@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Form from "./components/Form";
-import {IFormProperties} from "./model/form/IFormProperties";
+import IFormProperties from "./model/form/IFormProperties";
 
 // noinspection JSUnusedGlobalSymbols
 export default function(properties: IFormProperties | undefined | null): void {
